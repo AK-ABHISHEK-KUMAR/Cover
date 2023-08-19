@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cover | Job Portal</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+  </head>
+  <body>
+    <div>
+      <header class="p-3 mb-3 border-bottom">
+        <div class="container-fluid">
+          <div
+            class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+          >
+            <a
+              href="/dashboard"
+              class="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none"
+            >
+              <img
+                src="/assets/logo.svg"
+                alt="Logo"
+                width="30"
+                height="24"
+                class="d-inline-block align-text-top"
+              />
+            </a>
+
+            <ul
+              class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+            >
+              <li>
+                <a href="/dashboard" class="nav-link px-2 link-secondary"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a href="/jobs" class="nav-link px-2 link-body-emphasis"
+                  >Jobs</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/jobs/applicants"
+                  class="nav-link px-2 link-body-emphasis"
+                  >Application</a
+                >
+              </li>
+            </ul>
+
+            <form
+              id="#search"
+              class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3"
+              role="search"
+            >
+              <input
+                type="search"
+                name="search"
+                class="form-control"
+                placeholder="Search..."
+                aria-label="Search"
+              />
+            </form>
+            <a class="btn btn-outline-danger" href="/auth/logout"> Logout </a>
+          </div>
+        </div>
+      </header>
+      <div class="container"><%- include (page, { data, user }) %></div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+      integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      document
+        .querySelector("form")
+        .addEventListener("submit", function (event) {
+          var id = document.querySelector('input[name="search"]').value;
+          this.action = "/jobs/id/" + id;
+        });
+    </script>
+  </body>
+</html>

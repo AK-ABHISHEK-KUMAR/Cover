@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="navbar">
+    <div class="text fw-semibold fs-3">Jobs</div>
+    <% if(user?.usertype === "recruiter") {%>
+    <div class="ms-auto"><%-include ("./newJob")%></div>
+    <% } %>
+  </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4 my-2">
+    <% data.forEach(job=> { %>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-text">
+            <h5 class="card-title mb-3 fw-bold fs-3"><%= job.companyName%></h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+              <%= job.category%>
+              <span class="fw-bold text text-primary"
+                ><%= job.designation%></span
+              >
+            </h6>
+            <div><%= job.description%></div>
+            <br />
+            <i class="bi bi-geo-alt-fill">
+              <span class="text text-secondary fw-semibold">
+                <%= job.location%>
+              </span></i
+            >
+            <br />
+            <i class="bi bi-cash">
+              <span class="text text-secondary fw-semibold">
+                Salary: <%= job.salary%>
+              </span>
+            </i>
+            <br />
+            <i class="bi bi-person-badge-fill">
+              <span class="text text-secondary fw-semibold">
+                Openings: <%= job.openings%>
+              </span>
+            </i>
+            <br />
+            <i class="bi bi-calendar-fill">
+              <span class="text text-secondary fw-semibold">
+                Apply by: <%= new Date(job.lastDate).toLocaleDateString()%>
+              </span>
+            </i>
+            <p class="mt-2">
+              <% job.skills.forEach(skill=> { %>
+              <span class="badge rounded-pill text-bg-success p-2 m-1"
+                ><%=skill%></span
+              >
+              <% }) %>
+            </p>
+          </div>
+          <div class="d-grid">
+            <% if(user?.usertype === "recruiter") {%>
+            <a
+              type="button"
+              href="/jobs/applicants/<%=job.id%>"
+              class="btn btn-primary"
+              data-bs-jobId="<%= job.id %>"
+            >
+              Details
+            </a>
+            <% }else { %>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#applyjobModal"
+              data-bs-jobId="<%= job.id %>"
+            >
+              Apply
+            </button>
+            <%-include ("./applyJob")%> <%}%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }) %> <% if(data.length === 0) {%>
+    <div class="container-fluid mt-5">
+      <h1 class="display-1 fw-bolder">No Data!</h1>
+    </div>
+    <% } %>
+  </div>
+</div>

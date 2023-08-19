@@ -1,0 +1,91 @@
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="applyjobModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="applyjobModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Apply Job</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form id="applyJob" method="post" enctype="multipart/form-data">
+        <div class="modal-body">
+          <div class="container">
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Name</span>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Email</span>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder="Enter your email"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">Phone No.</span>
+              <input
+                type="tel"
+                class="form-control"
+                id="phone"
+                name="phone"
+                placeholder="Enter your phone number"
+              />
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1"
+                >Upload Resume</span
+              >
+              <input
+                type="file"
+                class="form-control-file"
+                id="uploadfile"
+                name="resume"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary">Apply</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script defer>
+    var applyjobModal = document.getElementById("applyjobModal");
+    var form = document.querySelector("#applyJob"); // select the form element
+    applyjobModal.addEventListener("show.bs.modal", function (event) {
+      var button = event.relatedTarget;
+      var jobId = button.getAttribute("data-bs-jobId");
+      form.action = "/jobs/apply/" + jobId; // set the form action
+      var modalTitle = applyjobModal.querySelector(".modal-title");
+      modalTitle.textContent = "Apply for job " + jobId;
+    });
+  </script>
+</div>

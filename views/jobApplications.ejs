@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-3 g-4 my-2">
+    <% data.jobDetails?.forEach(job=> { %>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <div class="card-text">
+            <h5 class="card-title mb-3 fw-bold fs-3"><%= job.companyName%></h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">
+              <%= job.category%>
+              <span class="fw-bold text text-primary"
+                ><%= job.designation%></span
+              >
+            </h6>
+            <div><%= job.description%></div>
+            <br />
+            <i class="bi bi-geo-alt-fill">
+              <span class="text text-secondary fw-semibold">
+                <%= job.location%>
+              </span></i
+            >
+            <br />
+            <i class="bi bi-cash">
+              <span class="text text-secondary fw-semibold">
+                Salary: <%= job.salary%>
+              </span>
+            </i>
+            <br />
+            <i class="bi bi-person-badge-fill">
+              <span class="text text-secondary fw-semibold">
+                Openings: <%= job.openings%>
+              </span>
+            </i>
+            <br />
+            <i class="bi bi-calendar-fill">
+              <span class="text text-secondary fw-semibold">
+                Apply by: <%= new Date(job.lastDate).toLocaleDateString()%>
+              </span>
+            </i>
+            <p class="mt-2">
+              <% job.skills.forEach(skill=> { %>
+              <span class="badge rounded-pill text-bg-success p-2 m-1"
+                ><%=skill%></span
+              >
+              <% }) %>
+            </p>
+          </div>
+          <div class="card-footer row p-0">
+            <a
+              id="updateJob"
+              type="button"
+              class="btn btn-outline-info col"
+              data-bs-toggle="modal"
+              data-bs-target="#updatejobModal"
+              data-bs-jobId="<%= job.id %>"
+            >
+              Update
+            </a>
+            <%-include ("./updateJob", {data: job})%>
+            <a
+              id="deleteJob"
+              type="button"
+              href="/jobs/delete/<%= job.id %>"
+              class="btn btn-outline-danger col"
+              data-bs-jobId="<%= job.id %>"
+            >
+              Delete
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% }) %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Job Id</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Resume</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (const user of data.applicants) { %>
+        <tr>
+          <td><%= user.jobId %></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.phone %></td>
+          <td>
+            <span class="row px-2">
+              <a
+                type="button"
+                class="btn btn-outline-primary col"
+                download
+                href="<%= user.resume %>"
+                >resume</a
+              >
+              <button
+                type="submit"
+                class="deleteApplicant col btn btn-danger p-1"
+                data-bs-userId="<%=user.id%>"
+              >
+                <i class="bi bi-trash"></i>
+              </button>
+            </span>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+  <script defer>
+    const deleteButtons = document.querySelectorAll(".deleteApplicant");
+
+    deleteButtons.forEach((button) => {
+      button.addEventListener("click", async (event) => {
+        event.preventDefault(); // Prevent the default form submission
+
+        const userId = button.getAttribute("data-bs-userId"); // Capture userId here
+
+        try {
+          const response = await fetch(`/jobs/delete/applicants/${userId}`, {
+            method: "DELETE",
+          });
+
+          if (response.ok) {
+            // Handle successful deletion, such as removing the row from the table
+            event.target.closest("tr").remove();
+            location.reload();
+          } else {
+            console.error("Failed to delete user");
+          }
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      });
+    });
+  </script>
+</div>
