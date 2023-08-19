@@ -169,7 +169,7 @@ const applyToJob = async (req, res) => {
     name,
     email,
     phone,
-    resume: `http://localhost:3000/uploads/${filename}`,
+    resume: `https://cover-oxni.onrender.com/uploads/${filename}`,
   });
   const applicantEmail = getUser(req).email;
   const jobApplicationsId = getApplications(applicantEmail);
