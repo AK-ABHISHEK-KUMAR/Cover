@@ -5,7 +5,7 @@ const applicants = [
     name: "Demo",
     email: "demo@example.com",
     phone: 1234567890,
-    resume: `http://localhost:3000/uploads/1692093867417-ProblemStatement.md`,
+    resume: `https://cover-oxni.onrender.com/uploads/1692093867417-ProblemStatement.md`,
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ const applicants = [
     name: "Demo1",
     email: "demo1@example.com",
     phone: 4567891230,
-    resume: `http://localhost:3000/uploads/1692093897378-ProblemStatement.md`,
+    resume: `https://cover-oxni.onrender.com/uploads/1692093897378-ProblemStatement.md`,
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ const applicants = [
     name: "XYZ",
     email: "xyz@example.com",
     phone: 7894561230,
-    resume: `http://localhost:3000/uploads/1692093923968-ProblemStatement.md`,
+    resume: `https://cover-oxni.onrender.com/uploads/1692093923968-ProblemStatement.md`,
   },
   {
     id: 4,
@@ -29,7 +29,7 @@ const applicants = [
     name: "Demo2",
     email: "demo2@example.com",
     phone: 7418529630,
-    resume: `http://localhost:3000/uploads/1692093953245-ProblemStatement.md`,
+    resume: `https://cover-oxni.onrender.com/uploads/1692093953245-ProblemStatement.md`,
   },
 ];
 
